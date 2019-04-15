@@ -20,11 +20,11 @@ public class CsvCarImporter implements ICarImporter {
     }
 
     @Override
-    public List<Car> Import() {
+    public List<Car> importData() {
         var result = new ArrayList<Car>();
         for (String line: csv.split("\\r?\\n")) {
             var properties = Arrays.asList(line.split(","));
-            result.add(carBuilder.Build(properties));
+            result.add(carBuilder.build(properties));
         }
 
         return result;

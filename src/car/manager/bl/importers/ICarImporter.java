@@ -5,5 +5,5 @@ import car.manager.bl.models.Car;
 import java.util.List;
 
 public interface ICarImporter{
-    List<Car> Import();
+    List<Car> importData();
 }

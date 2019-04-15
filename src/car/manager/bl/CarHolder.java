@@ -15,20 +15,20 @@ public class CarHolder {
         cars = new ArrayList();
     }
 
-    public void Add(Car car){
+    public void add(Car car){
         cars.add(car);
-        SortBy((a, b) -> 0);
+        sortBy((a, b) -> 0);
     }
 
-    public void SortBy(Comparator<Car> comparator){
+    public void sortBy(Comparator<Car> comparator){
         cars.sort(comparator);
     }
 
-    public String Export(ICarExporter exporter){
-        return exporter.Export(cars);
+    public String exportData(ICarExporter exporter){
+        return exporter.exportData(cars);
     }
 
-    public void Import(ICarImporter importer){
-        cars = importer.Import();
+    public void importData(ICarImporter importer){
+        cars = importer.importData();
     }
 }

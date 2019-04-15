@@ -8,34 +8,34 @@ import java.util.List;
 
 public class CarBuilder {
 
-    public Car Build(List<String> properties){
+    public Car build(List<String> properties){
         try {
-            String carType = properties.get(0);
+            var carType = properties.get(0);
 
             if (carType.equals(CarType.ELECTRIC_CAR.toString())) {
                 return new ElectricCar(
                         properties.get(1).trim(),
                         properties.get(2).trim(),
-                        ParseMeasureUnit(properties.get(3)),
-                        ParseMeasureUnit(properties.get(4)),
-                        ParseMeasureUnit(properties.get(5))
+                        parseMeasureUnit(properties.get(3)),
+                        parseMeasureUnit(properties.get(4)),
+                        parseMeasureUnit(properties.get(5))
                 );
             } else if (carType.equals(CarType.GAS_CAR.toString())) {
                 return new GasCar(
                         properties.get(1).trim(),
                         properties.get(2).trim(),
-                        ParseMeasureUnit(properties.get(3)),
-                        ParseMeasureUnit(properties.get(4)),
-                        ParseMeasureUnit(properties.get(5))
+                        parseMeasureUnit(properties.get(3)),
+                        parseMeasureUnit(properties.get(4)),
+                        parseMeasureUnit(properties.get(5))
                 );
             } else if (carType.equals(CarType.HYBRID_CAR.toString())) {
                 return new HybridCar(
                         properties.get(1).trim(),
                         properties.get(2).trim(),
-                        ParseMeasureUnit(properties.get(3)),
-                        ParseMeasureUnit(properties.get(4)),
-                        ParseMeasureUnit(properties.get(5)),
-                        ParseMeasureUnit(properties.get(6))
+                        parseMeasureUnit(properties.get(3)),
+                        parseMeasureUnit(properties.get(4)),
+                        parseMeasureUnit(properties.get(5)),
+                        parseMeasureUnit(properties.get(6))
                 );
             }
         }
@@ -43,10 +43,10 @@ public class CarBuilder {
             throw new InvalidParameterException("The string is not correct csv format.");
         }
 
-        return null;
+        throw new InvalidParameterException("The car type is not supported.");
     }
 
-    private MeasureUnit ParseMeasureUnit(String value){
+    private MeasureUnit parseMeasureUnit(String value){
         var measureUnit = new MeasureUnit();
 
         if(value.contains(MeasureUnitType.euro.toString())){

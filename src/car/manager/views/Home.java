@@ -7,10 +7,7 @@ import car.manager.bl.exporters.CsvCarExporter;
 import car.manager.bl.importers.CsvCarImporter;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,12 +30,12 @@ public class Home implements IPanel{
     private CsvCarImporter csvImporter;
 
     public Home(){
-        carHolder = Provider.GetCarHolder();
+        carHolder = Provider.getCarHolder();
         csvExporter = new CsvCarExporter();
         csvImporter = new CsvCarImporter();
 
-        Init();
-        Display();
+        init();
+        display();
     }
 
     @Override
@@ -46,40 +43,40 @@ public class Home implements IPanel{
         return panel;
     }
 
-    private void Init(){
+    private void init(){
         createCarButton.addActionListener((e) -> App.Navigate(new CreateCar()));
-        importButton.addActionListener((e) -> Import());
-        exportButton.addActionListener((e) -> Export());
-        saveButton.addActionListener((e) -> Save());
-        resetButton.addActionListener((e) -> Display());
+        importButton.addActionListener((e) -> importData());
+        exportButton.addActionListener((e) -> exportData());
+        saveButton.addActionListener((e) -> save());
+        resetButton.addActionListener((e) -> display());
 
         sortBy.addActionListener ((e) ->  {
-            Sort();
-            Display();
+            sort();
+            display();
         });
 
     }
 
-    private void Sort(){
+    private void sort(){
         var sort = sortBy.getSelectedItem();
         if(sort == "Brand"){
-            carHolder.SortBy(Comparator.comparing(o -> o.brand));
+            carHolder.sortBy(Comparator.comparing(o -> o.brand));
 
         }else if(sort == "Price"){
-            carHolder.SortBy(Comparator.comparing(o -> (BigDecimal)o.price.value));
+            carHolder.sortBy(Comparator.comparing(o -> (BigDecimal)o.price.value));
         }
     }
 
-    private void Display(){
-        showTextPane.setText(carHolder.Export(csvExporter));
+    private void display(){
+        showTextPane.setText(carHolder.exportData(csvExporter));
     }
 
-    private void Import(){
+    private void importData(){
         try {
             var fileChooser = new JFileChooser();
             fileChooser.showOpenDialog(panel.getComponent(0));
             var csv = Files.readString(Paths.get(fileChooser.getSelectedFile().getPath()));
-            Save(csv);
+            save(csv);
         } catch(Exception e) {
             JOptionPane.showMessageDialog(
                     null,
@@ -89,11 +86,11 @@ public class Home implements IPanel{
         }
     }
 
-    private void Export(){
+    private void exportData(){
         var fileChooser = new JFileChooser();
         fileChooser.setSelectedFile(new File("output.csv"));
         fileChooser.showSaveDialog(panel.getComponent(0));
-        var csv = carHolder.Export(csvExporter);
+        var csv = carHolder.exportData(csvExporter);
 
         try {
             Files.writeString(Paths.get(fileChooser.getSelectedFile().getPath()),csv);
@@ -106,17 +103,17 @@ public class Home implements IPanel{
         }
     }
 
-    private void Save(){
-        Save(showTextPane.getText());
+    private void save(){
+        save(showTextPane.getText());
     }
 
-    private void Save(String csv){
+    private void save(String csv){
         try {
             csvImporter.setCsv(csv);
-            carHolder.Import(csvImporter);
+            carHolder.importData(csvImporter);
 
-            Sort();
-            Display();
+            sort();
+            display();
         } catch(InvalidParameterException e) {
             JOptionPane.showMessageDialog(
                     null,

@@ -9,8 +9,8 @@ import java.util.List;
 
 public class CsvCarExporter implements ICarExporter {
     @Override
-    public String Export(List<Car> cars) {
-        StringBuilder result = new StringBuilder();
+    public String exportData(List<Car> cars) {
+        var result = new StringBuilder();
         for (Car car: cars) {
 
             result.append(car.type + ", ");
@@ -19,15 +19,15 @@ public class CsvCarExporter implements ICarExporter {
             result.append(car.enginePower.toString() + ", ");
 
             if(car instanceof GasCar){
-                GasCar gasCar = (GasCar)car;
+                var gasCar = (GasCar)car;
                 result.append(gasCar.engineDisplacement.toString() + ", ");
             } else if(car instanceof HybridCar){
-                HybridCar hybridCar = (HybridCar)car;
+                var hybridCar = (HybridCar)car;
                 result.append(hybridCar.engineDisplacement.toString() + ", ");
                 result.append(hybridCar.batteryCapacity.toString() + ", ");
 
             } else if(car instanceof ElectricCar){
-                ElectricCar electricCar = (ElectricCar)car;
+                var electricCar = (ElectricCar)car;
                 result.append(electricCar.batteryCapacity.toString() + ", ");
             }
 

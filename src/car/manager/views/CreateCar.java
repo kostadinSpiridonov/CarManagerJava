@@ -34,9 +34,9 @@ public class CreateCar implements IPanel{
     private CarBuilder carBuilder;
 
     CreateCar(){
-        carHolder = Provider.GetCarHolder();
+        carHolder = Provider.getCarHolder();
         carBuilder = new CarBuilder();
-        Init();
+        init();
     }
 
     @Override
@@ -44,18 +44,18 @@ public class CreateCar implements IPanel{
         return createCar;
     }
 
-    private void Init(){
-        electrictRadioButton.addActionListener((ActionEvent e) -> ShowFormByCarType(CarType.ELECTRIC_CAR));
-        hybridRadioButton.addActionListener((ActionEvent e) -> ShowFormByCarType(CarType.HYBRID_CAR));
-        gasRadioButton.addActionListener((ActionEvent e) -> ShowFormByCarType(CarType.GAS_CAR));
-        saveButton.addActionListener((ActionEvent e) -> CreateCar());
+    private void init(){
+        electrictRadioButton.addActionListener((ActionEvent e) -> showFormByCarType(CarType.ELECTRIC_CAR));
+        hybridRadioButton.addActionListener((ActionEvent e) -> showFormByCarType(CarType.HYBRID_CAR));
+        gasRadioButton.addActionListener((ActionEvent e) -> showFormByCarType(CarType.GAS_CAR));
+        saveButton.addActionListener((ActionEvent e) -> createCar());
         cancelButton.addActionListener((ActionEvent e) -> App.Navigate(new Home()));
     }
 
-    private void CreateCar(){
-        var carType = GetSelectedCarType();
+    private void createCar(){
+        var carType = getSelectedCarType();
 
-        if(!Validate(carType)){
+        if(!validate(carType)){
             return;
         }
 
@@ -75,13 +75,13 @@ public class CreateCar implements IPanel{
         }
         carProperties.add(priceInput.getText() + MeasureUnitType.euro);
 
-        var car = carBuilder.Build(carProperties);
-        carHolder.Add(car);
+        var car = carBuilder.build(carProperties);
+        carHolder.add(car);
 
         App.Navigate(new Home());
     }
 
-    private CarType GetSelectedCarType(){
+    private CarType getSelectedCarType(){
         if(hybridRadioButton.isSelected()){
             return CarType.HYBRID_CAR;
         } else if(gasRadioButton.isSelected()){
@@ -93,7 +93,7 @@ public class CreateCar implements IPanel{
         return null;
     }
 
-    private void ShowFormByCarType(CarType carType){
+    private void showFormByCarType(CarType carType){
         switch(carType){
             case GAS_CAR:{
                 batteryCapacityInput.setVisible(false);
@@ -125,7 +125,7 @@ public class CreateCar implements IPanel{
         }
     }
 
-    private boolean Validate(CarType carType){
+    private boolean validate(CarType carType){
         var doubleRegex = "[0-9]{1,13}(\\.[0-9]*)?";
 
         if(empty(brandInput.getText())||
@@ -146,11 +146,11 @@ public class CreateCar implements IPanel{
             errorLabel.setText("Engine power should be a number.");
             return false;
         }
-        if (!batteryCapacityInput.getText().matches(doubleRegex)){
+        if (carType != CarType.GAS_CAR && !batteryCapacityInput.getText().matches(doubleRegex)){
             errorLabel.setText("Battery capacity be a number.");
             return false;
         }
-        if (!engineDisplacementInput.getText().matches(doubleRegex)){
+        if (carType != CarType.ELECTRIC_CAR && !engineDisplacementInput.getText().matches(doubleRegex)){
             errorLabel.setText("Engine displacement should be a number.");
             return false;
         }
