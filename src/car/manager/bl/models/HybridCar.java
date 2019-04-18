@@ -14,6 +14,22 @@ public class HybridCar extends Car{
         super(brand, model, price, enginePower);
         this.engineDisplacement = engineDisplacement;
         this.batteryCapacity = batteryCapacity;
-        this.type = CarType.HYBRID_CAR;
+        this.setType(CarType.HYBRID_CAR);
+    }
+
+    public MeasureUnit getBatteryCapacity(){
+        return batteryCapacity;
+    }
+
+    public void setBatteryCapacity(MeasureUnit batteryCapacity){
+        this.batteryCapacity = batteryCapacity;
+    }
+
+    public MeasureUnit getEngineDisplacement(){
+        return engineDisplacement;
+    }
+
+    public void setEngineDisplacement(MeasureUnit measureUnit){
+        this.engineDisplacement = engineDisplacement;
     }
 }

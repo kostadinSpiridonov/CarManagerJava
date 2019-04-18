@@ -11,6 +11,14 @@ public class GasCar  extends Car {
             MeasureUnit price){
         super(brand, model, price, enginePower);
         this.engineDisplacement = engineDisplacement;
-        this.type = CarType.GAS_CAR;
+        this.setType(CarType.GAS_CAR);
+    }
+
+    public MeasureUnit getEngineDisplacement(){
+        return engineDisplacement;
+    }
+
+    public void setEngineDisplacement(MeasureUnit measureUnit){
+        this.engineDisplacement = engineDisplacement;
     }
 }

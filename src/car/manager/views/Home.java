@@ -60,10 +60,10 @@ public class Home implements IPanel{
     private void sort(){
         var sort = sortBy.getSelectedItem();
         if(sort == "Brand"){
-            carHolder.sortBy(Comparator.comparing(o -> o.brand));
+            carHolder.sortBy(Comparator.comparing(o -> o.getBrand()));
 
         }else if(sort == "Price"){
-            carHolder.sortBy(Comparator.comparing(o -> (BigDecimal)o.price.value));
+            carHolder.sortBy(Comparator.comparing(o -> (BigDecimal)o.getPrice().value));
         }
     }
 

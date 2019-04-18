@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.security.InvalidParameterException;
 import java.util.List;
 
-public class CarBuilder {
+public class CarFactory {
 
     public Car build(List<String> properties){
         try {

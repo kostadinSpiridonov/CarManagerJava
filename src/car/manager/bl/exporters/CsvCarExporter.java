@@ -13,10 +13,10 @@ public class CsvCarExporter implements ICarExporter {
         var result = new StringBuilder();
         for (Car car: cars) {
 
-            result.append(car.type + ", ");
-            result.append(car.brand + ", ");
-            result.append(car.model + ", ");
-            result.append(car.enginePower.toString() + ", ");
+            result.append(car.getType() + ", ");
+            result.append(car.getBrand() + ", ");
+            result.append(car.getModel() + ", ");
+            result.append(car.getEnginePower().toString() + ", ");
 
             if(car instanceof GasCar){
                 var gasCar = (GasCar)car;
@@ -28,10 +28,10 @@ public class CsvCarExporter implements ICarExporter {
 
             } else if(car instanceof ElectricCar){
                 var electricCar = (ElectricCar)car;
-                result.append(electricCar.batteryCapacity.toString() + ", ");
+                result.append(electricCar.getBatteryCapacity().toString() + ", ");
             }
 
-            result.append(car.price.toString());
+            result.append(car.getPrice().toString());
             result.append(String.format("%n", ""));
         }
 

@@ -1,7 +1,7 @@
 package car.manager.views;
 
 import car.manager.App;
-import car.manager.bl.CarBuilder;
+import car.manager.bl.CarFactory;
 import car.manager.bl.CarHolder;
 import car.manager.bl.Provider;
 import car.manager.bl.models.*;
@@ -31,11 +31,11 @@ public class CreateCar implements IPanel{
     private JButton cancelButton;
 
     private CarHolder carHolder;
-    private CarBuilder carBuilder;
+    private CarFactory carBuilder;
 
     CreateCar(){
         carHolder = Provider.getCarHolder();
-        carBuilder = new CarBuilder();
+        carBuilder = new CarFactory();
         init();
     }
 

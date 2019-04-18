@@ -1,7 +1,7 @@
 package car.manager.bl.models;
 
 public class ElectricCar extends Car{
-    public MeasureUnit batteryCapacity;
+    private MeasureUnit batteryCapacity;
 
     public ElectricCar(
             String brand,
@@ -11,6 +11,14 @@ public class ElectricCar extends Car{
             MeasureUnit price){
         super(brand, model, price, enginePower);
         this.batteryCapacity = batteryCapacity;
-        this.type = CarType.ELECTRIC_CAR;
+        this.setType(CarType.ELECTRIC_CAR);
+    }
+
+    public MeasureUnit getBatteryCapacity(){
+        return batteryCapacity;
+    }
+
+    public void setBatteryCapacity(MeasureUnit batteryCapacity){
+        this.batteryCapacity = batteryCapacity;
     }
 }
