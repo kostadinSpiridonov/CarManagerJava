@@ -54,7 +54,7 @@ public abstract class Car {
           return type;
      }
 
-     public void setType(CarType enginePower){
+     public void setType(CarType type){
           this.type = type;
      }
 }
